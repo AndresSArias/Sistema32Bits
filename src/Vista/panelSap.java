@@ -245,6 +245,38 @@ public class panelSap extends JPanel{
 	public JLabel[] getBtns_bitsMAR() {
 		return btns_bitsMAR;
 	}
+
+	public void setBtns_bitsControl(JLabel[] btns_bitsControl) {
+		this.btns_bitsControl = btns_bitsControl;
+	}
+
+	public void setBtns_bistBUS(JLabel[] btns_bistBUS) {
+		this.btns_bistBUS = btns_bistBUS;
+	}
+
+	public void setBtns_bitsA(JLabel[] btns_bitsA) {
+		this.btns_bitsA = btns_bitsA;
+	}
+
+	public void setBtns_bitsB(JLabel[] btns_bitsB) {
+		this.btns_bitsB = btns_bitsB;
+	}
+
+	public void setBtns_bitsALU(JLabel[] btns_bitsALU) {
+		this.btns_bitsALU = btns_bitsALU;
+	}
+
+	public void setBtns_bitsIR(JLabel[] btns_bitsIR) {
+		this.btns_bitsIR = btns_bitsIR;
+	}
+
+	public void setBtns_bitsOUT(JLabel[] btns_bitsOUT) {
+		this.btns_bitsOUT = btns_bitsOUT;
+	}
+
+	public void setBtns_bitsMAR(JLabel[] btns_bitsMAR) {
+		this.btns_bitsMAR = btns_bitsMAR;
+	}
     
     
     

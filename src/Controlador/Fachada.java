@@ -26,6 +26,9 @@ public class Fachada {
 		
 	}
 
+	
+
+	
 	public void BorrarMemoria(panelMemoria panel) {
 		
 		panel.establacerMemoria();
