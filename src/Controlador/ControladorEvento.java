@@ -15,7 +15,7 @@ public class ControladorEvento implements ActionListener, MouseListener{
 	private ventanaPrincipal interfaz;
 	private Timer t;
 	private int tiempo = 1000;
-	
+	private int tiempoOpcode = 1000;
 	public ControladorEvento (ventanaPrincipal interfaz) {
 		
 		this.interfaz = interfaz;
@@ -29,7 +29,23 @@ public class ControladorEvento implements ActionListener, MouseListener{
 			interfaz.getFachada().BorrarMemoria(interfaz.getPanelMemoria());
 		}
 		if(ae.getSource() == interfaz.getPanelCPU().getBotonEjecutar1()) {
+			try {
+				t.stop();
+			}catch (NullPointerException npe) {
+				
+			}
 			interfaz.getFachada().Ejecutar(interfaz.getPanelMemoria(), interfaz.getPanelSap());
+			
+			t = new Timer (tiempo, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					interfaz.getFachada().EjecutarOpcode(interfaz.getPanelMemoria(), interfaz.getPanelSap(), interfaz.getPanelCPU());
+				}
+				
+			});
+			t.start();
+			
+
 		}
 		if(ae.getSource() == interfaz.getPanelCPU().getBotonEjecutar()) {
 			
@@ -41,6 +57,7 @@ public class ControladorEvento implements ActionListener, MouseListener{
 				
 			});
 			t.start();
+			
 		}
 		if (ae.getSource() == interfaz.getPanelCPU().getBotonReset()) {
 			interfaz.getFachada().Resetear(interfaz.getPanelMemoria(),interfaz.getPanelSap(),interfaz.getPanelCPU());

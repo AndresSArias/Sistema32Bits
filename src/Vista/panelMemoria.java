@@ -26,7 +26,7 @@ public class panelMemoria extends JPanel{
 	private JTable tablaMemoria;
 	
 	//Dirrecciónes
-	String[] dirrecciones = {"[000000]",
+	private String[] dirrecciones = {"[000000]",
 			"[000001]",
 			"[000010]",
 			"[000011]",
@@ -105,7 +105,7 @@ public class panelMemoria extends JPanel{
 		this.add(panelSuperior, BorderLayout.NORTH);
 		panelSuperior.setLayout(new BorderLayout(0, 0));
 		
-		etiquetaMemoria = new JLabel("           ¡CONETENIDO DE LA MEMORIA!");
+		etiquetaMemoria = new JLabel("                    ¡CONETENIDO DE LA MEMORIA!");
 		etiquetaMemoria.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelSuperior.add(etiquetaMemoria, BorderLayout.SOUTH);
 		
@@ -194,6 +194,10 @@ public class panelMemoria extends JPanel{
 
 	public JTable getTablaMemoria() {
 		return tablaMemoria;
+	}
+
+	public String[] getDirrecciones() {
+		return dirrecciones;
 	}
 	
 	
