@@ -2,6 +2,8 @@ package Controlador;
 
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
 import Vista.panelCPU;
 import Vista.panelMemoria;
 import Vista.panelSap;
@@ -20,6 +22,17 @@ public class Fachada {
 	private String[] mar;
 	private String marS;
 	private int caminoAux = 0;
+	private String dirreccionAux = "";
+	
+	private String[] registroA;
+	
+	private String[] registroB;
+
+	private String[] alu;
+
+	private String[] salida;
+	
+
 	
 	
 	private int camino = 0;
@@ -31,7 +44,17 @@ public class Fachada {
 		this.interfaz = interfaz;
 	}
 	
-	
+	public void Resetear(panelMemoria panelMemoria, panelSap panelSap, panelCPU panelCPU) {
+		
+		enEjecucion = false;
+		establecerVariables();
+		establecerPaneles(panelSap);
+		
+
+		
+		memoriaEnEjecucion (panelMemoria);
+		
+	}
 	
 	public void Ejecutar(panelMemoria panelMemoria, panelSap panelSap) {
 		
@@ -48,30 +71,78 @@ public class Fachada {
 		setMar(panelMemoria);
 		actualizarMar(panelSap);
 		memoriaEnEjecucion (panelMemoria);
+		
 		camino++;
 
+	}
+	
+	private void establecerPaneles(panelSap panelSap) {
+		actualizarBus(panelSap);
+		actualizarIntruccion(panelSap);
+		actualizarMar(panelSap);
+		actualizarRegistroA(panelSap);
+		actualizarRegistroB(panelSap);
+		actualizarAlu(panelSap);
+		actualizarSalida(panelSap);
+	}
+
+	private void establecerVariables() {
+		camino = 0;
+		bus = new String[] {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		mar = new String[] {"0","0","0","0","0","0"};
+		historialBus.clear();
+		registroA = new String[] {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		registroB = new String[] {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		alu = new String[] {"0","0","0","0","0","0","0","0","0","0","0","0"};
+		salida = new String[] {"0","0","0","0","0","0","0","0","0","0","0","0"};
+	}
+
+	private void actualizarSalida(panelSap panel) {
+		
+		for (int i = 0; i < salida.length; i++) {
+			panel.getBtns_bitsOUT()[i].setText(salida[i]);
+		}
+		
+	}
+
+	private void actualizarAlu(panelSap panel) {
+		
+		for (int i = 0; i < alu.length; i++) {
+			panel.getBtns_bitsALU()[i].setText(alu[i]);
+		}
+	}
+
+	private void actualizarRegistroA(panelSap panel) {
+		
+		for (int i = 0; i < registroA.length; i++) {
+			panel.getBtns_bitsA()[i].setText(registroA[i]);
+		}
+	}
+	
+	private void actualizarRegistroB(panelSap panel) {
+		
+		for (int i = 0; i < registroB.length; i++) {
+			panel.getBtns_bitsB()[i].setText(registroB[i]);
+		}
 	}
 	
 	private void setMar(panelMemoria panel) {
 		
 		mar = new String[6];
-		marS = null;
+		marS = "";
 		
 		for (int j = 0; j < 6; j++) {
-			bus[j] = (String) panel.getTablaMemoria().getValueAt(camino, (j+7));
-			marS = marS + bus[j];
-		}
+			mar[j] = (String) panel.getTablaMemoria().getValueAt(camino, (j+7));
+			marS = marS + mar[j];
+		}		
 		
 		for (int i = 0; i < memoria.length ; i++) {
-			
-			for (int j = 0 ; j  < memoria[0].length; j++) {
-				
-				
-				System.out.print(memoria[i][j]+"\t");
-				
+			dirreccionAux = memoria[i][0].replaceAll("\\[", "").replaceAll("\\]","");
+	
+			if (marS.equals(dirreccionAux)) {
+				caminoAux = i;
+				break;
 			}
-			
-			System.out.print("\n");
 			
 		}
 		
@@ -80,7 +151,6 @@ public class Fachada {
 
 
 	private void actualizarIntruccion(panelSap panel) {
-		
 		
 		for (int i = 0; i < bus.length; i++) {
 			try {
@@ -96,7 +166,9 @@ public class Fachada {
 
 	private void actualizarMar(panelSap panel) {
 		
-		
+		for (int i = 0; i < mar.length; i++) {
+			panel.getBtns_bitsMAR()[i].setText(mar[i]);
+		}
 		
 	}
 
@@ -144,10 +216,9 @@ public class Fachada {
 			for (int j = 0 ; j  < memoria[0].length; j++) {
 				
 				
-				System.out.print(memoria[i][j]+"\t");
+				System.out.print(memoria[i][0]+"\t");
 				
 			}
-			
 			System.out.print("\n");
 			
 		}
@@ -173,7 +244,7 @@ public class Fachada {
 		
 		if (memoriaEnEjecucion(panel) == true) {
 			
-		}else {
+		}else if (memoriaEnEjecucion(panel) == false ){
 			
 			String valor = (String) panel.getTablaMemoria().getValueAt(fila, columna);
 			
@@ -197,6 +268,11 @@ public class Fachada {
 		
 		
 	}
+
+	
+
+
+	
 
 
 	

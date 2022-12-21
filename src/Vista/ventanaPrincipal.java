@@ -52,6 +52,8 @@ public class ventanaPrincipal extends JFrame {
 	  panelMemoria.getTablaMemoria().addMouseListener(getControl());
 	  panelMemoria.getBotonBorrarMemoria().addActionListener(getControl());
 	  panelCPU.getBotonEjecutar1().addActionListener(getControl());
+	  panelCPU.getBotonEjecutar().addActionListener(getControl());
+	  panelCPU.getBotonReset().addActionListener(getControl());
 	  
   }
   public ControladorEvento getControl() {

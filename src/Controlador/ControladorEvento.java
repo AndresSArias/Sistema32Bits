@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JTable;
+import javax.swing.Timer;
 
 import Vista.ventanaPrincipal;
 
@@ -12,6 +13,8 @@ import Vista.ventanaPrincipal;
 public class ControladorEvento implements ActionListener, MouseListener{
 
 	private ventanaPrincipal interfaz;
+	private Timer t;
+	private int tiempo = 1000;
 	
 	public ControladorEvento (ventanaPrincipal interfaz) {
 		
@@ -27,6 +30,26 @@ public class ControladorEvento implements ActionListener, MouseListener{
 		}
 		if(ae.getSource() == interfaz.getPanelCPU().getBotonEjecutar1()) {
 			interfaz.getFachada().Ejecutar(interfaz.getPanelMemoria(), interfaz.getPanelSap());
+		}
+		if(ae.getSource() == interfaz.getPanelCPU().getBotonEjecutar()) {
+			
+			t = new Timer (tiempo, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					interfaz.getFachada().Ejecutar(interfaz.getPanelMemoria(), interfaz.getPanelSap());
+				}
+				
+			});
+			t.start();
+		}
+		if (ae.getSource() == interfaz.getPanelCPU().getBotonReset()) {
+			interfaz.getFachada().Resetear(interfaz.getPanelMemoria(),interfaz.getPanelSap(),interfaz.getPanelCPU());
+			try {
+				t.stop();
+			}catch (NullPointerException npe) {
+				
+			}
+			
 		}
 		
 	}
