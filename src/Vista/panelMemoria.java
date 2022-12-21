@@ -175,6 +175,8 @@ public class panelMemoria extends JPanel{
         
         
         tablaMemoria.getTableHeader().setReorderingAllowed(false) ;
+        tablaMemoria.setRowSelectionAllowed(false);
+       
 		
 	}
 

@@ -25,6 +25,9 @@ public class ControladorEvento implements ActionListener, MouseListener{
 		if (ae.getSource() == interfaz.getPanelMemoria().getBotonBorrarMemoria()) {
 			interfaz.getFachada().BorrarMemoria(interfaz.getPanelMemoria());
 		}
+		if(ae.getSource() == interfaz.getPanelCPU().getBotonEjecutar1()) {
+			interfaz.getFachada().Ejecutar(interfaz.getPanelMemoria(), interfaz.getPanelSap());
+		}
 		
 	}
 

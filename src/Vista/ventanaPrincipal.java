@@ -32,6 +32,7 @@ public class ventanaPrincipal extends JFrame {
     this.setTitle("ProyectoFinalSistema32Bits");
     this.setResizable(false);
     this.setBounds(100, 100, 1300, 800);
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.getContentPane().setLayout(new BorderLayout(0, 0));
     
     
@@ -50,6 +51,7 @@ public class ventanaPrincipal extends JFrame {
 	  
 	  panelMemoria.getTablaMemoria().addMouseListener(getControl());
 	  panelMemoria.getBotonBorrarMemoria().addActionListener(getControl());
+	  panelCPU.getBotonEjecutar1().addActionListener(getControl());
 	  
   }
   public ControladorEvento getControl() {
